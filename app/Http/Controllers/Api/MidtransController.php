@@ -27,15 +27,15 @@ class MidtransController extends Controller
 
         switch ($transactionStatus) {
             case 'capture':
-                if ($request->payment_type == 'credit_card') {
-                    if ($request->fraud_status == 'challeng') {
+                if ($request->payment_type == 'bank_transfer') {
+                    if ($request->fraud_status == 'challenge') {
                         $transaction->update(['payment_status' => 'pending']);
                     } else {
                         $transaction->update(['payment_status' => 'success']);
                     }
                 }
                 break;
-                case 'setlement':
+                case 'settlement':
                     $transaction->update(['payment_status' => 'success']);
                     break;
                 case 'pending':
