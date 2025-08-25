@@ -104,6 +104,8 @@ class BookingController extends Controller
 
     public function show(BookingShowRequest $request)
     {
+        $transaction = $this->transactionRepository->getTransactionByCodeEmailPhone($request->code, $request->email, $request->phone);
+
         return view('pages.booking.detail');
     }
 
