@@ -35,11 +35,6 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function checkBooking()
-    {
-        return view('pages.booking.index');
-    }
-
     public function findKos()
     {
         $categories = $this->categoryReposiroty->getAllCategories();

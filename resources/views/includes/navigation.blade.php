@@ -5,7 +5,7 @@
                 <img src="{{asset('')}}assets/images/icons/global-green.svg" class="flex w-8 h-8 shrink-0" alt="icon">
                 <span class="text-sm font-semibold text-white">Discover</span>
             </a>
-            <a href="{{route('checbooking')}}" class="flex flex-col items-center gap-2 text-center">
+            <a href="{{route('find.booking')}}" class="flex flex-col items-center gap-2 text-center">
                 <img src="{{asset('')}}assets/images/icons/note-favorite.svg" class="flex w-8 h-8 shrink-0" alt="icon">
                 <span class="text-sm font-semibold text-white">Orders</span>
             </a>

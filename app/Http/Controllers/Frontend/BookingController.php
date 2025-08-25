@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookingShowRequest;
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Http\Requests\CustomerInformationStoreRequest;
@@ -96,9 +97,14 @@ class BookingController extends Controller
         return view('pages.booking.success', compact('transaction'));
     }
 
-    public function deatilBooking()
+     public function checkBooking()
     {
-        return view('pages.booking..detail');
+        return view('pages.booking.find-booking');
+    }
+
+    public function show(BookingShowRequest $request)
+    {
+        return view('pages.booking.detail');
     }
 
 }

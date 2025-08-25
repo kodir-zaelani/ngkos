@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('root');
-Route::get('/check-booking', [App\Http\Controllers\Frontend\FrontendController::class, 'checkBooking'])->name('checbooking');
 Route::get('/find-kos', [App\Http\Controllers\Frontend\FrontendController::class, 'findKos'])->name('findkos');
 Route::get('/find-result', [App\Http\Controllers\Frontend\FrontendController::class, 'findResult'])->name('findkos.result');
 Route::get('/catagory/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'categoryKos'])->name('kos.category');
@@ -17,4 +16,5 @@ Route::post('/kos/booking/{slug}/information/save', [App\Http\Controllers\Fronte
 Route::get('/kos/booking/{slug}/checkout', [App\Http\Controllers\Frontend\BookingController::class, 'checkout'])->name('booking.checkout');
 Route::post('/kos/booking/{slug}/payment', [App\Http\Controllers\Frontend\BookingController::class, 'payment'])->name('booking.payment');
 Route::get('/booking-success', [App\Http\Controllers\Frontend\BookingController::class, 'success'])->name('booking.success');
-Route::get('/booking-detail', [App\Http\Controllers\Frontend\BookingController::class, 'deatilBooking'])->name('booking.detail');
+Route::get('/find-booking', [App\Http\Controllers\Frontend\BookingController::class, 'checkBooking'])->name('find.booking');
+Route::post('/check-booking', [App\Http\Controllers\Frontend\BookingController::class, 'show'])->name('check.booking.show');
