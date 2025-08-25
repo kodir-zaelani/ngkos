@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Twilio\Rest\Client;
 
 class MidtransController extends Controller
 {
@@ -25,8 +24,6 @@ class MidtransController extends Controller
         if (!$transaction) {
             return response()->json(['message' => 'Transaction not found'], 404);
         }
-
-        // Twillio Whatapps
 
 
         $message =
