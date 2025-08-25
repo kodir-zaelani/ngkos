@@ -31,6 +31,16 @@ class MidtransController extends Controller
         $token  = "c162df75d8ec75f45bc860241c06f153";
         $twilio = new Client($sid, $token);
 
+        $message =
+        "Halo, " . $transaction->name . "!" . PHP_EOL . PHP_EOL .
+        "Kami telah menerima pembayaran anda dengan kode booking: " . $transaction->code . "." . PHP_EOL .
+        "Total pembayaran: Rp " . number_format($transaction->total_amount, 0, ',', '.') . PHP_EOL . PHP_EOL .
+        "Anda bisa datang ke kos: " . $transaction->boardinghouse->name . PHP_EOL .
+        "Alamat: " . $transaction->boardinghouse->address . PHP_EOL .
+        "Mulai tangga; " . date('d-m-Y', strtotime($transaction->start_date)) . PHP_EOL . PHP_EOL .
+        "Terima kasih atas kepercayaan Anda! " . PHP_EOL .
+        "Kami tunggu kedatangan Anda.";
+
         switch ($transactionStatus) {
             case 'capture':
                 if ($request->payment_type == 'credit_card') {
@@ -43,6 +53,8 @@ class MidtransController extends Controller
                 break;
                 case 'settlement':
                     $transaction->update(['payment_status' => 'success']);
+
+
                     break;
                 case 'pending':
                     $transaction->update(['payment_status' => 'pending']);
