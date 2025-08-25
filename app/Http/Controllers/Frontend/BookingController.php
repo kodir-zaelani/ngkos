@@ -106,7 +106,11 @@ class BookingController extends Controller
     {
         $transaction = $this->transactionRepository->getTransactionByCodeEmailPhone($request->code, $request->email, $request->phone);
 
-        return view('pages.booking.detail');
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Data Transaksi Tidak Ditemukan!');
+        }
+
+        return view('pages.booking.detail', compact('transaction'));
     }
 
 }

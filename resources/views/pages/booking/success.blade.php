@@ -59,6 +59,7 @@
     </div>
     <div class="flex flex-col gap-[14px]">
         <a href="{{route('root')}}" class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-orange">Explore Other Kos</a>
+
         <a href="booking-details.html" class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-black">View My Booking</a>
     </div>
 </div>

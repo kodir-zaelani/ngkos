@@ -50,6 +50,9 @@
     <p class="text-sm text-red-500">{{$message}}</p>
     @enderror
 </div>
+@if (session('error'))
+    <p class="text-center text-red-500">{{session('error')}}</p>
+@endif
 <button type="submit" class="flex w-full justify-center rounded-full p-[14px_20px] bg-ngekos-orange font-bold text-white">View My Booking</button>
 </div>
 </form>
