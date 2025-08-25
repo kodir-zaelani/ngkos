@@ -28,7 +28,6 @@ class MidtransController extends Controller
 
         // Twillio Whatapps
 
-        $twilio = new Client($sid, $token);
 
         $message =
         "Halo, " . $transaction->name . "!" . PHP_EOL . PHP_EOL .
