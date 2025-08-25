@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Twilio\Rest\Client;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,6 +25,11 @@ class MidtransController extends Controller
          if (!$transaction) {
             return response()->json(['message' => 'Transaction Not Found'], 404);
         }
+
+        // Twillio Whatapps
+        $sid    = "ACd55acf358704572a7c6d04fae93939d7";
+        $token  = "c162df75d8ec75f45bc860241c06f153";
+        $twilio = new Client($sid, $token);
 
         switch ($transactionStatus) {
             case 'capture':

@@ -38,7 +38,7 @@
 </div>
 <section id="Popular" class="flex flex-col gap-4">
     <div class="flex items-center justify-between px-5">
-        <h2 class="font-bold">Popular Kos</h2>
+        <h2 class="font-bold">Kos Populer</h2>
         <a href="#">
             <div class="flex items-center gap-2">
                 <span>See all</span>
