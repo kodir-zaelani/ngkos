@@ -27,8 +27,7 @@ class MidtransController extends Controller
         }
 
         // Twillio Whatapps
-        $sid    = "ACd55acf358704572a7c6d04fae93939d7";
-        $token  = "c162df75d8ec75f45bc860241c06f153";
+
         $twilio = new Client($sid, $token);
 
         $message =
