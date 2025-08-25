@@ -188,7 +188,7 @@
             <p class="font-semibold">Down Payment 30%</p>
             @endif
         </div>
-        @if ($transaction->payment_status === wire:pending)
+        @if ($transaction->payment_status === 'pending')
             <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img src="{{asset('')}}assets/images/icons/security-card.svg" class="flex w-6 h-6 shrink-0" alt="icon">
