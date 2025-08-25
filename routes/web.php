@@ -17,3 +17,4 @@ Route::post('/kos/booking/{slug}/information/save', [App\Http\Controllers\Fronte
 Route::get('/kos/booking/{slug}/checkout', [App\Http\Controllers\Frontend\BookingController::class, 'checkout'])->name('booking.checkout');
 Route::post('/kos/booking/{slug}/payment', [App\Http\Controllers\Frontend\BookingController::class, 'payment'])->name('booking.payment');
 Route::get('/booking-success', [App\Http\Controllers\Frontend\BookingController::class, 'success'])->name('booking.success');
+Route::get('/booking-detail', [App\Http\Controllers\Frontend\BookingController::class, 'deatilBooking'])->name('booking.detail');

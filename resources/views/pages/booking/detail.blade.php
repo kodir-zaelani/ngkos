@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Booking Detail')
 @section('content')
 <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
     <a href="check-booking.html" class="flex items-center justify-center w-12 h-12 overflow-hidden bg-white rounded-full shrink-0">

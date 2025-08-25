@@ -96,4 +96,9 @@ class BookingController extends Controller
         return view('pages.booking.success', compact('transaction'));
     }
 
+    public function deatilBooking()
+    {
+        return view('pages.booking..detail');
+    }
+
 }

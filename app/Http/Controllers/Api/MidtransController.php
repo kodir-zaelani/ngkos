@@ -8,12 +8,12 @@ use App\Http\Controllers\Controller;
 
 class MidtransController extends Controller
 {
-    public function callback(Requets $request)
+    public function callback(Request $request)
     {
         $serverKey = config('midtrans.serverkey');
-        $hasedKey = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        $hashedKey = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
 
-        if ($hasedKey !== $request->signature_key) {
+        if ($hashedKey !== $request->signature_key) {
             return response()->json(['message' => 'Invalid signature key'], 403);
         }
 
@@ -21,13 +21,13 @@ class MidtransController extends Controller
         $orderId = $request->order_id;
         $transaction = Transaction::where('code', $orderId)->first();
 
-         if (!$transaction) {
-            return response()->json(['message' => 'Transaction Not Found'], 404);
+        if (!$transaction) {
+            return response()->json(['message' => 'Transaction not found'], 404);
         }
 
         switch ($transactionStatus) {
             case 'capture':
-                if ($request->payment_type == 'bank_transfer') {
+                if ($request->payment_type == 'credit_card') {
                     if ($request->fraud_status == 'challenge') {
                         $transaction->update(['payment_status' => 'pending']);
                     } else {
@@ -35,23 +35,23 @@ class MidtransController extends Controller
                     }
                 }
                 break;
-                case 'settlement':
-                    $transaction->update(['payment_status' => 'success']);
-                    break;
-                case 'pending':
-                    $transaction->update(['payment_status' => 'pending']);
-                    break;
-                case 'deny':
-                    $transaction->update(['payment_status' => 'failed']);
-                    break;
-                case 'expire':
-                    $transaction->update(['payment_status' => 'expired']);
-                    break;
-                case 'cancel':
-                    $transaction->update(['payment_status' => 'canceled']);
-                    break;
+            case 'settlement':
+                $transaction->update(['payment_status' => 'success']);
+                break;
+            case 'pending':
+                $transaction->update(['payment_status' => 'pending']);
+                break;
+            case 'deny':
+                $transaction->update(['payment_status' => 'failed']);
+                break;
+            case 'expire':
+                $transaction->update(['payment_status' => 'expired']);
+                break;
+            case 'cancel':
+                $transaction->update(['payment_status' => 'canceled']);
+                break;
             default:
-                transaction->update(['payment_status' => 'unknown']);
+                $transaction->update(['payment_status' => 'unknown']);
                 break;
         }
 
