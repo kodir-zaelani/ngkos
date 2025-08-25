@@ -14,8 +14,7 @@ class TransactionForm
         return $schema
         ->components([
             TextInput::make('code')
-            ->required()
-            ->numeric(),
+            ->required(),
             Select::make('boardinghouse_id')
             ->relationship('boardinghouse', 'name')
             ->required(),
@@ -28,7 +27,7 @@ class TransactionForm
             ->label('Email address')
             ->email()
             ->required(),
-            TextInput::make('phone_number')
+            TextInput::make('phone')
             ->tel()
             ->required(),
             Select::make('payment_methode')

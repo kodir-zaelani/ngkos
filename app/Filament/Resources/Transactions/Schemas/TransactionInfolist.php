@@ -13,8 +13,7 @@ class TransactionInfolist
             ->components([
                 TextEntry::make('id')
                     ->label('ID'),
-                TextEntry::make('code')
-                    ->numeric(),
+                TextEntry::make('code'),
                 TextEntry::make('boardinghouse_id'),
                 TextEntry::make('room_id'),
                 TextEntry::make('name'),
