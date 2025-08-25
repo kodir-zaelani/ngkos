@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Twilio\Rest\Client;
 
 class MidtransController extends Controller
 {
@@ -25,6 +26,21 @@ class MidtransController extends Controller
             return response()->json(['message' => 'Transaction not found'], 404);
         }
 
+        // Twillio Whatapps
+        $sid    = "ACd55acf358704572a7c6d04fae93939d7";
+        $token  = "c162df75d8ec75f45bc860241c06f153";
+        $twilio = new Client($sid, $token);
+
+        $message =
+        "Halo, " . $transaction->name . "!" . PHP_EOL . PHP_EOL .
+        "Kami telah menerima pembayaran anda dengan kode booking: " . $transaction->code . "." . PHP_EOL .
+        "Total pembayaran: Rp " . number_format($transaction->total_amount, 0, ',', '.') . PHP_EOL . PHP_EOL .
+        "Anda bisa datang ke kos: " . $transaction->boardinghouse->name . PHP_EOL .
+        "Alamat: " . $transaction->boardinghouse->address . PHP_EOL .
+        "Mulai tangga; " . date('d-m-Y', strtotime($transaction->start_date)) . PHP_EOL . PHP_EOL .
+        "Terima kasih atas kepercayaan Anda! " . PHP_EOL .
+        "Kami tunggu kedatangan Anda.";
+
         switch ($transactionStatus) {
             case 'capture':
                 if ($request->payment_type == 'credit_card') {
@@ -35,26 +51,35 @@ class MidtransController extends Controller
                     }
                 }
                 break;
-            case 'settlement':
-                $transaction->update(['payment_status' => 'success']);
-                break;
-            case 'pending':
-                $transaction->update(['payment_status' => 'pending']);
-                break;
-            case 'deny':
-                $transaction->update(['payment_status' => 'failed']);
-                break;
-            case 'expire':
-                $transaction->update(['payment_status' => 'expired']);
-                break;
-            case 'cancel':
-                $transaction->update(['payment_status' => 'canceled']);
-                break;
-            default:
-                $transaction->update(['payment_status' => 'unknown']);
-                break;
-        }
+                case 'settlement':
+                    $transaction->update(['payment_status' => 'success']);
 
-        return response()->json(['message' => 'Callback received successfully']);
-    }
-}
+                    $twilio->messages
+                    ->create("whatsapp:+" . $transaction->phone, // to
+                    array(
+                        "from" => "whatsapp:+14155238886",
+                        "body" => $message
+                        )
+                    );
+
+                    break;
+                    case 'pending':
+                        $transaction->update(['payment_status' => 'pending']);
+                        break;
+                        case 'deny':
+                            $transaction->update(['payment_status' => 'failed']);
+                            break;
+                            case 'expire':
+                                $transaction->update(['payment_status' => 'expired']);
+                                break;
+                                case 'cancel':
+                                    $transaction->update(['payment_status' => 'canceled']);
+                                    break;
+                                    default:
+                                    $transaction->update(['payment_status' => 'unknown']);
+                                    break;
+                                }
+
+                                return response()->json(['message' => 'Callback received successfully']);
+                            }
+                        }
