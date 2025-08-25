@@ -53,8 +53,13 @@ class MidtransController extends Controller
                 break;
                 case 'settlement':
                     $transaction->update(['payment_status' => 'success']);
-
-
+                    $twilio->messages
+                    ->create("whatsapp:+" . $transaction->phone, // to
+                    array(
+                        "from" => "whatsapp:+14155238886",
+                        "body" => $message
+                        )
+                    );
                     break;
                 case 'pending':
                     $transaction->update(['payment_status' => 'pending']);
