@@ -16,7 +16,6 @@ class TransactionsTable
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->numeric()
                     ->sortable(),
                 TextColumn::make('boardinghouse.name')
                     ->searchable(),
@@ -27,7 +26,7 @@ class TransactionsTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
-                TextColumn::make('phone_number')
+                TextColumn::make('phone')
                     ->searchable(),
                 TextColumn::make('payment_methode'),
                 TextColumn::make('payment_status')

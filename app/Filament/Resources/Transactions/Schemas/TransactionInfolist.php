@@ -19,7 +19,7 @@ class TransactionInfolist
                 TextEntry::make('name'),
                 TextEntry::make('email')
                     ->label('Email address'),
-                TextEntry::make('phone_number'),
+                TextEntry::make('phone'),
                 TextEntry::make('payment_methode'),
                 TextEntry::make('payment_status'),
                 TextEntry::make('start_date')
