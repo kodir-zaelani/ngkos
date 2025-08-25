@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Twilio\Rest\Client;
 
 class MidtransController extends Controller
 {
@@ -25,6 +26,10 @@ class MidtransController extends Controller
             return response()->json(['message' => 'Transaction not found'], 404);
         }
 
+        // Twillio Whatapps
+        $sid    = "ACd55acf358704572a7c6d04fae93939d7";
+        $token  = "c162df75d8ec75f45bc860241c06f153";
+        $twilio = new Client($sid, $token);
 
         $message =
         "Halo, " . $transaction->name . "!" . PHP_EOL . PHP_EOL .
